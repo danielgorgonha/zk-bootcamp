@@ -1,0 +1,3 @@
+[submodule "bootcamp/week1/lesson2/playground/lib/forge-std"]
+	path = bootcamp/week1/lesson2/playground/lib/forge-std
+	url = https://github.com/foundry-rs/forge-std
