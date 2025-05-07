@@ -19,13 +19,13 @@ O ZK Bootcamp é um programa intensivo de aprendizado focado em desenvolvimento 
 
 ### Semana 1: Fundamentos de Smart Contracts
 
-#### [Aula 1: O Grande Código | Introdução à Web3: O Que é e Por Que Você Precisa Saber!](bootcamp/week1/lesson1/readme.md)
+#### [Aula 1: O Grande Código | Introdução à Web3: O Que é e Por Que Você Precisa Saber!](bootcamp/week1/lesson1/README.md)
 - Configuração do ambiente de desenvolvimento
 - Introdução à EVM e Solidity
 - Primeiros passos com smart contracts
 - Conceitos básicos de segurança
 
-#### [Aula 2: O Grande Código | Seu primeiro projeto no ar usando solidity](bootcamp/week1/lesson2/readme.md)
+#### [Aula 2: O Grande Código | Seu primeiro projeto no ar usando solidity](bootcamp/week1/lesson2/README.md)
 - Ferramentas do Foundry
 - EVM & Solidity em profundidade
 - Fundamentos de Solidity
@@ -64,8 +64,8 @@ foundryup
 ```
 
 3. Siga as aulas em ordem:
-   - [Aula 1](bootcamp/week1/lesson1/readme.md)
-   - [Aula 2](bootcamp/week1/lesson2/readme.md)
+   - [Aula 1](bootcamp/week1/lesson1/README.md)
+   - [Aula 2](bootcamp/week1/lesson2/README.md)
 
 ## 📚 Recursos Adicionais
 
