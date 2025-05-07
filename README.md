@@ -1,6 +1,7 @@
 # 🚀 ZK Bootcamp
 
 ![OCG Logo](assets/ocg.png)
+<img src="./assets/ocg.png" alt="wallet" style="width: 100%; height: auto;">
 
 ## 📚 Sobre o Bootcamp
 
