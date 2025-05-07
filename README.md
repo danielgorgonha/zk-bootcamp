@@ -1,8 +1,7 @@
 # 🚀 ZK Bootcamp
 
 <div align="center">
-  <img src="assets/ocg.png" alt="OCG Logo" style="width: 100%; height: auto;"
-/>
+  <img src="assets/ocg.png" alt="OCG Logo"/>
 </div>
 
 ---
