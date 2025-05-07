@@ -425,7 +425,7 @@ Os **opcodes** (códigos operacionais) são instruções de baixo nível que a E
 ##### Custo de Gas e Opcodes
 - Cada **opcode** tem um custo de gás associado, dependendo da complexidade da operação.
 - O **gás** é necessário para cobrir o custo das operações de bytecode que são executadas pela EVM.
-- Se uma transação falhar (ex. devido a um `require` ou `revert`), o gás já consumido até o ponto da falha é perdido, mas o gás não utilizado é devolvido ao remetente.
+- Se uma transação falhar (ex. devido a um `require` ou `revert`), o gás consumido até o ponto da falha é perdido, mas o gás não utilizado é devolvido ao remetente.
 
 ##### Exemplo de Gasto de Gas com Opcodes
 Quando você executa uma função, o código em Solidity é compilado para bytecode e, em seguida, os opcodes são executados. Suponha que você tenha uma função de depósito (`deposit`):
@@ -511,6 +511,140 @@ Esse bytecode é o que será armazenado na blockchain quando o contrato for impl
 - Ele é gerado a partir do código Solidity e contém opcodes que instruem a EVM sobre as operações a serem executadas.
 - O custo de gás de um contrato depende do bytecode, e cada opcode no bytecode tem um custo associado.
 - O bytecode é a representação final do contrato inteligente, sendo essencial para sua execução e interação com a EVM. Ele está diretamente relacionado ao consumo de gás e à performance do contrato na blockchain.
+
+---
+
+## 🚀 Projeto Prático: Implementação do Token ERC-20
+
+Nesta seção, vamos compartilhar nossa experiência na implementação de um token ERC-20 completo, aplicando todos os conceitos aprendidos.
+
+### 📝 Estrutura do Projeto
+```
+playground/
+├── src/
+│   └── Token.sol         # Contrato principal do token
+├── test/
+│   └── Token.t.sol       # Testes do contrato
+├── script/
+│   └── Token.s.sol       # Script de deploy
+└── foundry.toml          # Configuração do Foundry
+```
+
+### 🎯 Implementação do Token
+
+#### Características Implementadas
+1. **Funcionalidades Básicas ERC-20**
+   - Transferência de tokens
+   - Aprovação de gastos
+   - Verificação de saldos
+   - Gerenciamento de permissões
+
+2. **Segurança**
+   - Validação de endereços zero
+   - Verificação de saldos
+   - Controle de permissões
+   - Proteção contra overflow/underflow
+
+3. **Eventos**
+   - `Transfer`: Rastreamento de transferências
+   - `Approval`: Rastreamento de aprovações
+   - `Mint`: Rastreamento de criação de tokens
+
+4. **Funcionalidades Adicionais**
+   - Sistema de mint para criação de tokens
+   - Gerenciamento flexível de allowance
+   - Total supply rastreável
+
+### 🧪 Testes Implementados
+
+1. **Testes Básicos**
+   - Verificação de nome, símbolo e decimais
+   - Testes de transferência
+   - Testes de aprovação
+   - Testes de allowance
+
+2. **Testes de Segurança**
+   - Validação de endereços zero
+   - Verificação de saldos insuficientes
+   - Testes de permissões
+
+3. **Testes Fuzz**
+   - Testes com valores aleatórios
+   - Verificação de limites
+   - Testes de stress
+
+### 📈 Melhorias Implementadas
+
+1. **Segurança**
+   - Adição de verificações de endereço zero
+   - Implementação de validações de saldo
+   - Melhoria nas mensagens de erro
+
+2. **Funcionalidade**
+   - Adição de sistema de mint
+   - Implementação de increaseAllowance/decreaseAllowance
+   - Rastreamento de total supply
+
+3. **Documentação**
+   - Comentários em inglês
+   - Documentação clara de funções
+   - Exemplos de uso
+
+### 🎓 Aprendizados
+
+1. **Técnicos**
+   - Implementação do padrão ERC-20
+   - Uso de eventos para rastreabilidade
+   - Gerenciamento de memória em Solidity
+   - Testes abrangentes com Foundry
+
+2. **Práticos**
+   - Desenvolvimento de smart contracts seguros
+   - Uso de ferramentas do Foundry
+   - Boas práticas de documentação
+   - Testes automatizados
+
+### 🔄 Fluxo de Desenvolvimento
+
+1. **Implementação Inicial**
+   - Criação do contrato básico
+   - Implementação de funções principais
+   - Configuração de eventos
+
+2. **Melhorias**
+   - Adição de verificações de segurança
+   - Implementação de funcionalidades extras
+   - Refatoração de código
+
+3. **Testes**
+   - Desenvolvimento de testes unitários
+   - Implementação de testes fuzz
+   - Verificação de casos de erro
+
+### 📚 Recursos Utilizados
+
+1. **Ferramentas**
+   - Foundry para desenvolvimento e testes
+   - Solidity 0.8.13
+   - Forge para compilação e deploy
+
+2. **Documentação**
+   - Padrão ERC-20
+   - Documentação do Foundry
+   - Boas práticas de Solidity
+
+### 🎯 Próximos Passos
+
+1. **Melhorias Futuras**
+   - Implementação de burn function
+   - Adição de pausabilidade
+   - Implementação de blacklist
+   - Otimização de gas
+
+2. **Expansão**
+   - Integração com outros contratos
+   - Implementação de funcionalidades DeFi
+   - Desenvolvimento de interface web
 
 ---
 
