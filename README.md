@@ -5,17 +5,26 @@
 />
 </div>
 
-## �� Sobre o Bootcamp
+---
 
-O ZK Bootcamp é um programa intensivo de aprendizado focado em desenvolvimento de smart contracts e zero-knowledge proofs. Este bootcamp foi projetado para fornecer uma base sólida em desenvolvimento blockchain, com foco especial em segurança e boas práticas.
+## 📚 Sobre o Bootcamp
+
+O **ZK Bootcamp – O GRANDE CÓDIGO** é uma jornada de aprendizado inovadora, dividida em três etapas, que prepara você para o futuro da tecnologia blockchain.  
+Aqui, você vai muito além da teoria: desenvolve projetos práticos, participa de desafios reais e tem a chance de avançar para as próximas fases junto com os melhores talentos.
+
+Tudo é 100% gratuito e com vagas limitadas, promovendo um ambiente de excelência, colaboração e crescimento.  
+O bootcamp é promovido pela Nearx Education Platform, conectando você ao que há de mais moderno em Web3, criptografia e zero-knowledge proofs.
+
+---
 
 ## 🎯 Objetivos
 
-- Aprender fundamentos de desenvolvimento de smart contracts
-- Entender conceitos de zero-knowledge proofs
-- Desenvolver habilidades práticas em Solidity
-- Implementar contratos seguros e otimizados
-- Explorar ferramentas modernas de desenvolvimento
+- Capacitar você com uma base sólida em Web3, Solidity, criptografia e integração fullstack.
+- Preparar para o futuro das provas de conhecimento zero (ZKPs) e aplicações descentralizadas.
+- Desenvolver habilidades práticas em smart contracts, Rust, EVM e frameworks modernos.
+- Estimular a criatividade e a resolução de problemas com projetos hands-on e desafios reais.
+- Identificar e destacar os melhores talentos, que poderão avançar para fases ainda mais desafiadoras do programa.
+- Fomentar uma comunidade de aprendizado colaborativo, inovação e excelência técnica.
 
 ## 📋 Estrutura do Curso
 
