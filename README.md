@@ -1,9 +1,10 @@
 # 🚀 ZK Bootcamp
 
-![OCG Logo](assets/ocg.png)
-<img src="./assets/ocg.png" alt="wallet" style="width: 100%; height: auto;">
+<div align="center">
+  <img src="assets/ocg.png" alt="OCG Logo" width="200"/>
+</div>
 
-## 📚 Sobre o Bootcamp
+## �� Sobre o Bootcamp
 
 O ZK Bootcamp é um programa intensivo de aprendizado focado em desenvolvimento de smart contracts e zero-knowledge proofs. Este bootcamp foi projetado para fornecer uma base sólida em desenvolvimento blockchain, com foco especial em segurança e boas práticas.
 
