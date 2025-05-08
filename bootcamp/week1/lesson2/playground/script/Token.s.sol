@@ -10,7 +10,13 @@ contract TokenScript is Script {
     function setUp() public {}
 
     function run() public {
+        // Carrega a chave privada do ambiente
         uint256 deployerPrivateKey = vm.envUint("PRIVATE_KEY");
+        address deployer = vm.addr(deployerPrivateKey);
+        
+        console.log("Deployer address:", deployer);
+        console.log("Deployer balance:", deployer.balance);
+        
         vm.startBroadcast(deployerPrivateKey);
 
         // Deploy do contrato
@@ -18,10 +24,14 @@ contract TokenScript is Script {
         
         // Mint inicial de tokens para o deployer
         uint256 initialSupply = 1000000 * 10**18; // 1 milhão de tokens
-        token.mint(msg.sender, initialSupply);
+        token.mint(deployer, initialSupply);
         
         console.log("Token deployed at:", address(token));
+        console.log("Token name:", token.name());
+        console.log("Token symbol:", token.symbol());
+        console.log("Token decimals:", token.decimals());
         console.log("Initial supply minted:", initialSupply);
+        console.log("Deployer token balance:", token.balanceOf(deployer));
         
         vm.stopBroadcast();
     }

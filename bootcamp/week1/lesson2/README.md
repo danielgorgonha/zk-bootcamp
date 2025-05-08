@@ -285,14 +285,6 @@ Solidity possui três regiões principais para armazenar dados durante a execuç
 
 ---
 
-###### ⚠️ Dicas práticas:
-
-- Use `memory` ou `calldata` para tipos dinâmicos como `string`, `bytes` ou arrays.
-- `calldata` é ideal quando os dados só serão lidos.
-- Evite cópias desnecessárias entre `storage` e `memory` — isso consome mais gás.
-
----
-
 #### Comparação: `contract` (Solidity) vs `class` (POO)
 
 | Conceito             | Solidity (`contract`)         | Programação Orientada a Objetos (`class`) |
@@ -532,28 +524,39 @@ playground/
 
 ### 🎯 Implementação do Token
 
-#### Características Implementadas
-1. **Funcionalidades Básicas ERC-20**
-   - Transferência de tokens
-   - Aprovação de gastos
-   - Verificação de saldos
-   - Gerenciamento de permissões
+#### Características Básicas
+- Nome: "Bootcamp"
+- Símbolo: "OCG"
+- Decimais: 18
+- Supply Máximo: 1 bilhão de tokens
 
-2. **Segurança**
-   - Validação de endereços zero
-   - Verificação de saldos
-   - Controle de permissões
-   - Proteção contra overflow/underflow
+#### Funcionalidades Implementadas
+1. **Sistema de Roles**
+   - Owner: Controle total do contrato
+   - Admin: Gerenciamento de minters e pausa do contrato
+   - Minter: Permissão para criar novos tokens
 
-3. **Eventos**
-   - `Transfer`: Rastreamento de transferências
-   - `Approval`: Rastreamento de aprovações
-   - `Mint`: Rastreamento de criação de tokens
+2. **Controle de Segurança**
+   - Pausa do contrato para emergências
+   - Validação de endereços
+   - Timelock para mint (1 dia entre mints)
+   - Limite máximo de supply
 
-4. **Funcionalidades Adicionais**
-   - Sistema de mint para criação de tokens
-   - Gerenciamento flexível de allowance
-   - Total supply rastreável
+3. **Funções ERC-20**
+   - `transfer`: Transferência direta de tokens
+   - `approve`: Autorização de gasto
+   - `transferFrom`: Transferência autorizada
+   - `allowance`: Consulta de autorização
+   - Funções melhoradas de allowance (increase/decrease)
+
+4. **Eventos do Contrato**
+   - `Transfer`: Transferências de tokens
+   - `Approval`: Autorizações de gasto
+   - `Mint`: Criação de novos tokens
+   - `OwnershipTransferred`: Mudança de owner
+   - `MinterAdded/Removed`: Gerenciamento de minters
+   - `AdminAdded/Removed`: Gerenciamento de admins
+   - `Paused/Unpaused`: Controle de pausa
 
 ### 🧪 Testes Implementados
 
@@ -633,6 +636,28 @@ playground/
    - Documentação do Foundry
    - Boas práticas de Solidity
 
+### 🔐 Configuração do Ambiente
+
+#### Arquivo .env
+Crie um arquivo `.env` na raiz do projeto com as seguintes variáveis:
+
+```bash
+# Chave privada para deploy e interações
+PRIVATE_KEY=sua-private-key
+
+# RPC URLs
+SEPOLIA_RPC_URL=https://sepolia.infura.io/v3/seu-api-key
+
+# Etherscan API Key (para verificação do contrato)
+ETHERSCAN_API_KEY=seu-etherscan-api-key
+```
+
+⚠️ **Importante**:
+- Nunca compartilhe ou comite seu arquivo `.env`
+- Adicione `.env` ao `.gitignore`
+- Use apenas chaves de teste para desenvolvimento
+- Mantenha suas chaves privadas seguras
+
 ### 🎯 Próximos Passos
 
 1. **Melhorias Futuras**
@@ -646,6 +671,104 @@ playground/
    - Implementação de funcionalidades DeFi
    - Desenvolvimento de interface web
 
----
+### 📋 Comandos Principais
+
+```bash
+# Compilar o contrato
+forge build
+
+# Executar testes
+forge test
+
+# Deploy local (usando Anvil)
+forge script script/Token.s.sol:TokenScript --rpc-url http://localhost:8545 --private-key <chave_privada>
+
+# Deploy em testnet (Sepolia)
+forge script script/Token.s.sol:TokenScript --rpc-url sepolia --broadcast --verify -vvvv
+
+# Flags importantes:
+# --broadcast: Envia a transação para a rede
+# --verify: Verifica o contrato no Etherscan
+# -vvvv: Nível máximo de verbosidade para logs detalhados
+```
+
+### 🐍 Interação com Python (web3.py)
+
+Para interagir com o contrato usando Python, criamos um script que utiliza a biblioteca web3.py.
+
+#### Estrutura do Script
+```
+web3/
+├── main.py         # Script principal de interação
+└── .env           # Configurações e chaves (não versionado)
+```
+
+#### Configuração do Ambiente Python
+
+1. **Instalação das Dependências**
+```bash
+pip install web3 python-dotenv
+```
+
+2. **Arquivo .env**
+```bash
+# RPC URL da Sepolia (Infura)
+SEPOLIA_RPC_URL=https://sepolia.infura.io/v3/seu-api-key
+
+# Chave privada (sem o prefixo 0x)
+PRIVATE_KEY=sua-private-key
+
+# Endereço do contrato na Sepolia
+CONTRACT_ADDRESS=0xbd8Aa5e3CCbcfC0fe4a2E20E5C6C8caCE319D265
+
+# Endereço da sua carteira
+WALLET_ADDRESS=seu-endereco-carteira
+```
+
+#### Funcionalidades Implementadas
+
+1. **Consulta de Informações**
+   - Nome do token
+   - Símbolo
+   - Decimais
+   - Total Supply
+   - Saldo da conta
+
+2. **Operações**
+   - Transferência de tokens
+   - Verificação de saldos
+   - Tratamento de erros
+   - Confirmação de transações
+
+#### Exemplo de Uso
+
+```python
+# Exibe informações do token
+get_token_info()
+
+# Transfere tokens para outro endereço
+transfer_tokens("ENDERECO_DESTINO", 1.0)  # Transfere 1 token
+```
+
+#### Segurança
+
+- Chaves privadas armazenadas em variáveis de ambiente
+- Validação de endereços
+- Tratamento de erros em transações
+- Verificação de conexão com a rede
+
+#### Próximos Passos para o Script
+
+1. **Melhorias Planejadas**
+   - Adição de mais operações (approve, transferFrom)
+   - Interface de linha de comando (CLI)
+   - Logs mais detalhados
+   - Suporte a mais redes
+
+2. **Funcionalidades Adicionais**
+   - Monitoramento de eventos
+   - Histórico de transações
+   - Cálculo de gas
+   - Suporte a múltiplos tokens
 
 Feito com 💜 by <a href="https://www.linkedin.com/in/danielgorgonha/">Daniel R Gorgonha</a> :wave:
