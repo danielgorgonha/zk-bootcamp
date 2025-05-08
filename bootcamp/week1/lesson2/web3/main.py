@@ -2,7 +2,7 @@ from web3 import Web3
 import os
 from dotenv import load_dotenv
 
-# Carrega as variáveis do arquivo .env
+# Load environment variables
 load_dotenv()
 
 token_abi = [
@@ -20,40 +20,40 @@ token_abi = [
     {"name": "decreaseAllowance", "outputs": [{"type": "bool"}], "inputs": [{"type": "address"}, {"type": "uint256"}], "stateMutability": "nonpayable", "type": "function"},
 ]
 
-# Conexão com a Sepolia testnet
+# Connect to Sepolia testnet
 w3 = Web3(Web3.HTTPProvider(os.getenv('SEPOLIA_RPC_URL')))
 
-# Verifica a conexão
+# Verify connection
 if not w3.is_connected():
-    raise Exception("Não foi possível conectar à rede Sepolia")
+    raise Exception("Could not connect to Sepolia network")
 
-# Endereço do contrato implantado na Sepolia
+# Contract address deployed on Sepolia
 contract_address = os.getenv('CONTRACT_ADDRESS')
 contract = w3.eth.contract(address=w3.to_checksum_address(contract_address), abi=token_abi)
 
-# Conta que vai interagir (sua conta)
+# Account that will interact (your account)
 wallet_address = w3.to_checksum_address(os.getenv('WALLET_ADDRESS'))
 
-# Carrega a chave privada do .env
+# Load private key from .env
 private_key = os.getenv('PRIVATE_KEY')
 
 def get_token_info():
-    """Obtém informações básicas do token"""
-    print("\n=== Informações do Token ===")
-    print("Nome:", contract.functions.name().call())
-    print("Símbolo:", contract.functions.symbol().call())
-    print("Decimais:", contract.functions.decimals().call())
+    """Get basic token information"""
+    print("\n=== Token Information ===")
+    print("Name:", contract.functions.name().call())
+    print("Symbol:", contract.functions.symbol().call())
+    print("Decimals:", contract.functions.decimals().call())
     print("Total Supply:", contract.functions.totalSupply().call() / 10**18)
-    print("Saldo da conta:", contract.functions.balanceOf(wallet_address).call() / 10**18)
+    print("Account Balance:", contract.functions.balanceOf(wallet_address).call() / 10**18)
 
 def transfer_tokens(to_address, amount):
-    """Transfere tokens para outro endereço"""
+    """Transfer tokens to another address"""
     try:
-        # Prepara a transação
+        # Prepare transaction
         nonce = w3.eth.get_transaction_count(wallet_address)
-        amount_wei = int(amount * 10**18)  # Converte para wei
+        amount_wei = int(amount * 10**18)  # Convert to wei
         
-        # Constrói a transação
+        # Build transaction
         transaction = contract.functions.transfer(
             w3.to_checksum_address(to_address),
             amount_wei
@@ -64,24 +64,24 @@ def transfer_tokens(to_address, amount):
             'gasPrice': w3.eth.gas_price
         })
         
-        # Assina e envia a transação
+        # Sign and send transaction
         signed_txn = w3.eth.account.sign_transaction(transaction, private_key)
         tx_hash = w3.eth.send_raw_transaction(signed_txn.rawTransaction)
         
-        # Aguarda a confirmação
+        # Wait for confirmation
         receipt = w3.eth.wait_for_transaction_receipt(tx_hash)
-        print(f"\nTransferência realizada com sucesso!")
-        print(f"Hash da transação: {receipt['transactionHash'].hex()}")
+        print(f"\nTransfer successful!")
+        print(f"Transaction hash: {receipt['transactionHash'].hex()}")
         
     except Exception as e:
-        print(f"\nErro na transferência: {str(e)}")
+        print(f"\nTransfer error: {str(e)}")
 
 def main():
-    # Exibe informações do token
+    # Display token information
     get_token_info()
     
-    # Exemplo de transferência (descomente e ajuste os valores)
-    # transfer_tokens("ENDERECO_DESTINO", 1.0)  # Transfere 1 token
+    # Example transfer (uncomment and adjust values)
+    # transfer_tokens("DESTINATION_ADDRESS", 1.0)  # Transfer 1 token
 
 if __name__ == "__main__":
     main()
